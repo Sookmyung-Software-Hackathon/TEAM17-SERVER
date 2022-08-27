@@ -35,7 +35,7 @@
 </br>
 
 ## 핵심 기술 및 주요 기능
-## 🛠️사용한 기술스텍 🛠️
+## 🛠️ 기술스텍 🛠️
 
 - Front: Android Studio
 
@@ -54,7 +54,6 @@
 - Infra: AWS EC2, RDS
 
 
-</br>
 </br>
 
 
