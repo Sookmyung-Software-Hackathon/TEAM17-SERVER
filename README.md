@@ -38,8 +38,9 @@
 ## 🛠️사용한 기술스텍 🛠️
 
 - Front: Android Studio
+
 | **Architecture**            | MVVM                                                         |
-| ————————————— | —————————————————————————————— |
+| --------------------------- | ------------------------------------------------------------ |
 | **Design Pattern**          | Repository Pattern, Delegation Pattern                       |
 | **Jetpack Components**      | DataBinding, LiveData, ViewModel, Lifecycle, Navigation, ViewPager2, Room |
 | **Dependency Injection**    | Koin                                                         |
