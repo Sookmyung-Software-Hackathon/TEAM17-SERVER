@@ -6,7 +6,7 @@ import noeasy.server.domain.Team;
 
 @Getter @Setter
 public class TeamResponseDto {
-    Long id;
+    String id;
     String name;
     Double temperature;
 
