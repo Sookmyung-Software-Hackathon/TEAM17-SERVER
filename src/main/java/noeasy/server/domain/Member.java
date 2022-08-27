@@ -76,12 +76,12 @@ public class Member extends Timestamped implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return getPassword();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return email;
     }
 
     @Override

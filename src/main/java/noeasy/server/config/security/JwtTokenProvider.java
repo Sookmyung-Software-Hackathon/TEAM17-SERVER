@@ -27,11 +27,9 @@ public class JwtTokenProvider {
     @Value("${key.secret-key}")
     private String secretKey;
 
-    private long tokenValidTime = 3 * 60 * 60 * 1000L;  // 3시간
-    private long refreshTokenValidTime = 365 * 24 * 60 * 60 * 1000L; //1년
+    private long tokenValidTime = 12 * 60 * 60 * 1000L;  // 12시간
 
     private final UserDetailsService userDetailsService;
-
     private final MemberRepository memberRepository;
 
     @PostConstruct
@@ -42,20 +40,12 @@ public class JwtTokenProvider {
     public String createToken(String userPk, List<String> roles) {
         Claims claims = Jwts.claims().setSubject(userPk);
         claims.put("roles", roles);
+
         Date now = new Date();
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + tokenValidTime))
-                .signWith(SignatureAlgorithm.HS256, secretKey)
-                .compact();
-    }
-
-    public String createRefreshToken() {
-        Date now = new Date();
-        return Jwts.builder()
-                .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + refreshTokenValidTime))
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }

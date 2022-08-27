@@ -5,11 +5,10 @@ import org.springframework.http.HttpStatus;
 
 @AllArgsConstructor
 public enum TagType {
-    LUNCH(0, "LUNCH"),
-    DINNER(1, "DINNER"),
-    WORKSHOP(2, "WORKSHOP"),
-    DINING_TOGETHER(3, "DINING_TOGETHER");
+    LUNCH("LUNCH"),
+    DINNER("DINNER"),
+    WORKSHOP("WORKSHOP"),
+    DINING_TOGETHER("DINING_TOGETHER");
 
-    private final int id;
-    private final String content;
+    String content;
 }

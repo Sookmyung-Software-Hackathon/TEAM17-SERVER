@@ -50,10 +50,12 @@ public class BoggleService {
         );
 
         Boggle boggle = new Boggle(requestDto, member.getTeam());
-        Participant leader = new Participant(member, boggle);
-        boggle.setLeader(leader);
+        boggleRepository.save(boggle);
 
+        Participant leader = new Participant(member, boggle);
         participantRepository.save(leader);
+
+        boggle.setLeader(leader);
         boggleRepository.save(boggle);
 
         return new BoggleResponseDto(boggle);

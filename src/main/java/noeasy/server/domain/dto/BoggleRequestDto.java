@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Getter @Setter
 public class BoggleRequestDto {
     private String title;
+    // TODO: tag null
     private TagType tag;
     private LocalDateTime date_time;
     private int max_person;

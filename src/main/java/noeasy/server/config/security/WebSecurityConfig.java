@@ -12,10 +12,13 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-/*
- * Spring Security 관련 설정을 하는 Configuration 클래스
- */
+import java.util.Arrays;
+
+
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -23,20 +26,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenProvider jwtTokenProvider;
 
-    // 비밀번호 암호화에 필요한 PasswordEncoder를 Bean에 등록
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-    // authenticationManager를 Bean에 등록
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
-    // h2 DB에 테스트하는 경우에 인증 무시하도록 함
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
@@ -50,15 +50,36 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic().disable()  // rest api만을 고려해 기본 설정 해제
-                .csrf().disable()       // crsf 보안 토큰 disable
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 토큰 기반 인증 -> 세션 사용 x
+        http
+                    .httpBasic().disable()
+                    .cors().configurationSource(corsConfigurationSource())
                 .and()
-                .authorizeRequests()    // 요청에 대한 사용 권한 체크
-                .anyRequest().permitAll()                          // 그 외 나머지 요청은 인증 없이도 사용 가능
+                    .csrf().disable()
+                    .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 토큰 기반 인증 -> 세션 사용 x
+                .and()
+                    .formLogin().disable()
+                    .httpBasic().disable()
+                    .headers().frameOptions().disable()
+                .and()
+                    .authorizeRequests()
+                    .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
                         UsernamePasswordAuthenticationFilter.class);
-                // JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 전에 넣음
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.setAllowedOrigins(Arrays.asList("*")); // 놑놑 사이트 주소 추가
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "PATCH", "DELETE"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }
