@@ -45,6 +45,9 @@ public class Member extends Timestamped implements UserDetails {
     @JoinColumn(name ="team_id")
     private Team team;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
+    private List<Participant> participantList;
+
     private Integer birthYear;
 
     @ElementCollection(fetch = FetchType.EAGER)
