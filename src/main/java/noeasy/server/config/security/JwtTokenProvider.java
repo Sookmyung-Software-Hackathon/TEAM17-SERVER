@@ -2,6 +2,7 @@ package noeasy.server.config.security;
 
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
+import noeasy.server.repository.MemberRepository;
 import noeasy.server.util.KeyService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,31 +24,30 @@ import java.util.List;
 @Component
 public class JwtTokenProvider {
 
-    @Value("${key.secret-key}")                     // application.properties에서 secretKey 주입
+    @Value("${key.secret-key}")
     private String secretKey;
 
-    /* 토큰 유효시간 */
     private long tokenValidTime = 3 * 60 * 60 * 1000L;  // 3시간
     private long refreshTokenValidTime = 365 * 24 * 60 * 60 * 1000L; //1년
 
     private final UserDetailsService userDetailsService;
 
-    /* 객체 초기화 (secretKey를 Base64로 인코딩) */
+    private final MemberRepository memberRepository;
+
     @PostConstruct
     protected void init(){
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
-    /* JWT 토큰 생성 */
     public String createToken(String userPk, List<String> roles) {
-        Claims claims = Jwts.claims().setSubject(userPk);   // JWT payload에 저장되는 정보단위
-        claims.put("roles", roles);                         // 정보는 key / value 쌍으로 저장
+        Claims claims = Jwts.claims().setSubject(userPk);
+        claims.put("roles", roles);
         Date now = new Date();
         return Jwts.builder()
-                .setClaims(claims)                          // 정보 저장
-                .setIssuedAt(now)                           // 토큰 발행 시간
-                .setExpiration(new Date(now.getTime() + tokenValidTime))    // 유효 시간
-                .signWith(SignatureAlgorithm.HS256, secretKey)              // 사용할 암호화 알고리즘과 secret 값
+                .setClaims(claims)
+                .setIssuedAt(now)
+                .setExpiration(new Date(now.getTime() + tokenValidTime))
+                .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
 
@@ -60,25 +60,21 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    /* 인증 성공 시 SecurityContextHolder에 저장할 Authentication 객체 생성 */
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserEmail(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
-    /* 토큰에서 회원 정보 추출 */
     public String getUserEmail(String token) {
         if(validateToken(token))
             return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
         else return null;
     }
 
-    /* Request의 Header에서 token 값 가져오기 ("X-AUTH-TOKEN": "TOKEN VALUE") */
     public String resolveToken(HttpServletRequest request) {
         return request.getHeader("X-AUTH-TOKEN");
     }
 
-    /* 토큰의 유효성과 만료일자 확인 */
     public boolean validateToken(String jwtToken) {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);

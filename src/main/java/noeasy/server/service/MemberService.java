@@ -4,12 +4,10 @@ import lombok.AllArgsConstructor;
 import noeasy.server.domain.Member;
 import noeasy.server.domain.Team;
 import noeasy.server.domain.dto.MemberDto;
-import noeasy.server.domain.dto.TeamResponseDto;
 import noeasy.server.repository.MemberRepository;
-import noeasy.server.repository.TeamRepository;
+import noeasy.server.repository.team.TeamRepository;
 import noeasy.server.util.exception.CustomException;
 import noeasy.server.util.exception.ResponseCode;
-import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

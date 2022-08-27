@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 public class BoggleRequestDto {
     private String title;
     private TagType tag;
-    private int team_id;
     private LocalDateTime date_time;
     private int max_person;
     private boolean anonymity;
