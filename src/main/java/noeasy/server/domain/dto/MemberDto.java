@@ -24,6 +24,7 @@ public class MemberDto {
     private String type;
 
     @NotNull
+    @JsonProperty("birth_year")
     private Integer birthYear;
 
     private Team team;

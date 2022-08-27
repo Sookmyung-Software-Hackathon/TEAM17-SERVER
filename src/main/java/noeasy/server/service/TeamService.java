@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import noeasy.server.domain.Team;
 import noeasy.server.domain.dto.TeamRequestDto;
 import noeasy.server.domain.dto.TeamResponseDto;
+import noeasy.server.repository.VoteRepository;
 import noeasy.server.repository.team.TeamRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
