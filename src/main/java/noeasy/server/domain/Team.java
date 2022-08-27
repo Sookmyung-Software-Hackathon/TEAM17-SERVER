@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import noeasy.server.domain.dto.TeamRequestDto;
+import noeasy.server.util.RandomGenerator;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -13,8 +15,10 @@ import javax.persistence.*;
 public class Team extends Timestamped {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    @GeneratedValue(generator = RandomGenerator.generatorName)
+    @GenericGenerator(name = RandomGenerator.generatorName, strategy = "com.noeasy.server.util.RandomGenerator")
+    @Column
+    private String id;
 
     @Column(length = 24)
     String name;
@@ -25,5 +29,4 @@ public class Team extends Timestamped {
     public Team(TeamRequestDto teamRequestDto) {
         this.name = teamRequestDto.getName();
     }
-
 }
