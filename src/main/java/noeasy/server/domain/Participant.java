@@ -21,7 +21,8 @@ public class Participant {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "boggle_id")
     private Boggle boggle;
 
     public Participant(Member member, Boggle boggle) {

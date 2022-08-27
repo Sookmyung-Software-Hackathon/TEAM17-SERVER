@@ -6,7 +6,6 @@ import noeasy.server.domain.Member;
 import noeasy.server.domain.Participant;
 import noeasy.server.domain.dto.BoggleRequestDto;
 import noeasy.server.domain.dto.BoggleResponseDto;
-import noeasy.server.domain.type.TagType;
 import noeasy.server.repository.boggle.BoggleRepository;
 import noeasy.server.repository.MemberRepository;
 import noeasy.server.repository.ParticipantRepository;
@@ -21,7 +20,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BoggleService {
     private final BoggleRepository boggleRepository;
+
     private final ParticipantRepository participantRepository;
+
     private final MemberRepository memberRepository;
 
     public String participateBoggle(String boggleId, String email) {
@@ -38,7 +39,7 @@ public class BoggleService {
         return "ok";
     }
 
-    public List<BoggleResponseDto> readAll(List<TagType> tags, String keyword) {
+    public List<BoggleResponseDto> readAll(List<String> tags, String keyword) {
         return boggleRepository.findAllBoggleBySearch(tags, keyword)
                 .stream().map(b -> new BoggleResponseDto(b))
                 .collect(Collectors.toList());
@@ -69,5 +70,23 @@ public class BoggleService {
         return participantRepository.findByMember(member)
                 .stream().map(p -> new BoggleResponseDto(p.getBoggle()))
                 .collect(Collectors.toList());
+    }
+
+    public BoggleResponseDto readDetail(String boggleId) {
+        Boggle boggle = boggleRepository.findById(boggleId).orElseThrow(
+                () -> new CustomException(ResponseCode.BOGGLE_NOT_FOUND)
+        );
+
+        return new BoggleResponseDto(boggle);
+    }
+
+    public String completeBoggle(String boggleId) {
+        Boggle boggle = boggleRepository.findById(boggleId).orElseThrow(
+                () -> new CustomException(ResponseCode.BOGGLE_NOT_FOUND)
+        );
+        boggle.setSuccess(true);
+        boggleRepository.save(boggle);
+
+        return "ok";
     }
 }

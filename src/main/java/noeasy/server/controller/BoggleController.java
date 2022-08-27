@@ -2,7 +2,6 @@ package noeasy.server.controller;
 
 import lombok.RequiredArgsConstructor;
 import noeasy.server.domain.dto.BoggleRequestDto;
-import noeasy.server.domain.type.TagType;
 import noeasy.server.service.BoggleService;
 import noeasy.server.util.ResponseTemplate;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +48,7 @@ public class BoggleController {
 
     @GetMapping
     public ResponseEntity<ResponseTemplate> readAll(
-            @RequestParam(required = false, defaultValue = "") List<TagType> tags,
+            @RequestParam(required = false, defaultValue = "") List<String> tags,
             @RequestParam(required = false, defaultValue = "") String keyword
     ) {
         return ResponseEntity
@@ -57,6 +56,26 @@ public class BoggleController {
                         200,
                         "성공",
                         boggleService.readAll(tags, keyword))
+                );
+    }
+
+    @GetMapping("/detail/{boggleId}")
+    public ResponseEntity<ResponseTemplate> readDetail(@PathVariable String boggleId) {
+        return ResponseEntity
+                .ok(new ResponseTemplate(
+                        200,
+                        "성공",
+                        boggleService.readDetail(boggleId))
+                );
+    }
+
+    @PatchMapping("/success")
+    public ResponseEntity<ResponseTemplate> completeBoggle(@RequestParam String boggleId) {
+        return ResponseEntity
+                .ok(new ResponseTemplate(
+                        200,
+                        "성공",
+                        boggleService.completeBoggle(boggleId))
                 );
     }
 }

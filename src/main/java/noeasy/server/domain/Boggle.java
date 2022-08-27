@@ -1,16 +1,15 @@
 package noeasy.server.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import noeasy.server.domain.dto.BoggleRequestDto;
-import noeasy.server.domain.type.TagType;
 import noeasy.server.util.RandomGenerator;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "boggle")
@@ -27,9 +26,8 @@ public class Boggle extends Timestamped {
     @Column(length = 24)
     private String title;
 
-    @Enumerated(EnumType.STRING)
     @Column(length = 24)
-    private TagType tag;
+    private String tag;
 
     @Column
     private LocalDateTime date_time;
@@ -47,7 +45,11 @@ public class Boggle extends Timestamped {
     private boolean success = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
     private Team team;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "boggle")
+    private List<Participant> participantList = List.of();
 
     public Boggle(BoggleRequestDto requestDto, Team team) {
         this.title = requestDto.getTitle();
@@ -60,5 +62,9 @@ public class Boggle extends Timestamped {
 
     public void setLeader(Participant leader) {
         this.leader = leader;
+    }
+
+    public void setSuccess(boolean isSuccess) {
+        this.success = isSuccess;
     }
 }

@@ -3,7 +3,6 @@ package noeasy.server.repository.boggle;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import noeasy.server.domain.Boggle;
-import noeasy.server.domain.type.TagType;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -19,7 +18,7 @@ public class BoggleDslRepositoryImpl implements BoggleDslRepository {
     }
 
     @Override
-    public List<Boggle> findAllBoggleBySearch(List<TagType> tags, String keyword) {
+    public List<Boggle> findAllBoggleBySearch(List<String> tags, String keyword) {
         return queryFactory
                 .selectFrom(boggle)
                 .where(
@@ -30,7 +29,7 @@ public class BoggleDslRepositoryImpl implements BoggleDslRepository {
                 .fetch();
     }
 
-    private BooleanExpression tagContain(List<TagType> tags) {
+    private BooleanExpression tagContain(List<String> tags) {
         if (tags.isEmpty()) return null;
         else return boggle.tag.in(tags);
     }
