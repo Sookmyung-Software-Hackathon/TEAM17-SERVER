@@ -10,6 +10,8 @@ public enum ResponseCode {
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 계정이 존재하지 않습니다."),
     MEMBER_DUPLICATED(HttpStatus.CONFLICT, "이미 해당 계정의 유저가 존재합니다."),
 
+    VOTE_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 투표가 존재하지 않습니다."),
+
     BOGGLE_NOT_FOUND(HttpStatus.NOT_FOUND, "해당 보글이 존재하지 않습니다."),
 
     TOKEN_NOT_FOUND(HttpStatus.NOT_FOUND, "토큰이 존재하지 않습니다."),

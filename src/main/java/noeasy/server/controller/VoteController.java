@@ -1,17 +1,15 @@
 package noeasy.server.controller;
 
 import lombok.RequiredArgsConstructor;
-import noeasy.server.config.security.JwtTokenProvider;
-import noeasy.server.domain.Member;
-import noeasy.server.domain.Team;
-import noeasy.server.domain.Vote;
-import noeasy.server.domain.dto.MemberDto;
 import noeasy.server.domain.dto.VoteDto;
+import noeasy.server.domain.dto.VoterRequestDto;
 import noeasy.server.service.VoteService;
 import noeasy.server.util.NoDataResponseTemplate;
 import noeasy.server.util.ResponseTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @CrossOrigin
 @RestController
@@ -21,9 +19,10 @@ public class VoteController {
 
     private final VoteService voteService;
     @PostMapping("/generate")
-    public ResponseEntity<Object> generateVote(@RequestHeader("X-AUTH-TOKEN") String token, @RequestBody VoteDto voteDto){
+    public ResponseEntity<Object> generateVote(@RequestBody VoteDto voteDto, HttpServletRequest request){
+        String email = request.getUserPrincipal().getName();
 
-        voteService.generateNewVote(token,voteDto);
+        voteService.generateNewVote(email,voteDto);
 
         return ResponseEntity
                 .ok(new NoDataResponseTemplate(
@@ -33,17 +32,15 @@ public class VoteController {
                 );
     }
 
-//    @PostMapping("/participate")
-//    public ResponseEntity<Object> generateVote(@RequestHeader("X-AUTH-TOKEN") String token, @RequestBody String voteItemId){
-//
-//        voteService.generateNewVote(token,voteDto);
-//
-//        return ResponseEntity
-//                .ok(new ResponseTemplate(
-//                                200,
-//                                "투표 생성 성공",
-//                                voteDto
-//                        )
-//                );
-//    }
+        @PostMapping("/participate")
+        public ResponseEntity<Object> generateVote(@RequestBody VoterRequestDto requestDto, HttpServletRequest request){
+            String email = request.getUserPrincipal().getName();
+
+            return ResponseEntity
+                    .ok(new ResponseTemplate(
+                                    200,
+                                    "투표 생성 성공",
+                            voteService.participateVote(email, requestDto))
+                    );
+        }
 }

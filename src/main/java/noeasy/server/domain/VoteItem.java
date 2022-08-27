@@ -2,10 +2,17 @@ package noeasy.server.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class VoteItem {
     @Id
     @JsonIgnore
@@ -19,6 +26,9 @@ public class VoteItem {
 
     @NotNull
     private String content;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "voteItem")
+    private List<Voter> voterList = List.of();
 
     public VoteItem(Vote vote, String content){
         this.vote = vote;

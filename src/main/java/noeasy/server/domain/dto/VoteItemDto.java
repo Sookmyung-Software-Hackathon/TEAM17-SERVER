@@ -3,23 +3,18 @@ package noeasy.server.domain.dto;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import noeasy.server.domain.Vote;
-
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import noeasy.server.domain.VoteItem;
 
 @Getter
 @Setter
 public class VoteItemDto {
-
     @NotNull
     private Long id;
 
-    @NotNull
-    private Vote vote;
+    private String content;
 
-    public static class Vote
-
+    public VoteItemDto(VoteItem voteItem) {
+        this.id = voteItem.getId();
+        this.content= voteItem.getContent();
+    }
 }

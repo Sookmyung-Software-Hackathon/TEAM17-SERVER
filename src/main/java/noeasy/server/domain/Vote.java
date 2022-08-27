@@ -2,11 +2,18 @@ package noeasy.server.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Vote extends Timestamped {
 
     @Id
@@ -15,7 +22,7 @@ public class Vote extends Timestamped {
     private Long id;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name ="team_id")
     private Team team;
 
@@ -24,6 +31,12 @@ public class Vote extends Timestamped {
 
     @NotNull
     private LocalDateTime deadline;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vote")
+    private List<Voter> voterList = List.of();
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vote")
+    private List<VoteItem> voteItemList = List.of();
 
     Boolean expired = true;
 
