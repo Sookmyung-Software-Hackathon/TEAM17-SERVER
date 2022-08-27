@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import noeasy.server.domain.Team;
 import noeasy.server.domain.dto.TeamRequestDto;
 import noeasy.server.domain.dto.TeamResponseDto;
-import noeasy.server.repository.TeamRepository;
+import noeasy.server.repository.team.TeamRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +19,10 @@ public class TeamService {
     public List<TeamResponseDto> readTeamRanking() {
         List<Team> teamList = teamRepository.findAll(Sort.by("temperature"));
         return teamList.stream().map( e -> new TeamResponseDto(e)).collect(Collectors.toList());
+    }
+
+    public List<TeamResponseDto> readAll(String keyword) {
+        return teamRepository.findAllTeamBySearch(keyword).stream().map( e -> new TeamResponseDto(e)).collect(Collectors.toList());
     }
 
     public TeamResponseDto createTeam(TeamRequestDto requestDto) {
