@@ -52,6 +52,7 @@
 
 - Back: JAVA, Spring Boot, MySQL, JPA
 - Infra: AWS EC2, RDS
+- Ux/UI Design : Adobe illustrator, Figma
 
 
 </br>
