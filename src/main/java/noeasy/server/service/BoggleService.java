@@ -6,12 +6,14 @@ import noeasy.server.domain.Member;
 import noeasy.server.domain.Participant;
 import noeasy.server.domain.dto.BoggleRequestDto;
 import noeasy.server.domain.dto.BoggleResponseDto;
+import noeasy.server.domain.type.TagType;
 import noeasy.server.repository.boggle.BoggleRepository;
 import noeasy.server.repository.MemberRepository;
 import noeasy.server.repository.ParticipantRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,12 +36,24 @@ public class BoggleService {
         return "ok";
     }
 
-//    public List<BoggleResponseDto> readAll(List<String> tags, String keyword) {
-//        List<Boggle> boggleList = boggleRepository.findAllByTag(tags, keyword)
-//
-//    }
-//
-//    public BoggleResponseDto generateBoggle(BoggleRequestDto requestDto) {
-//
-//    }
+    public List<BoggleResponseDto> readAll(List<TagType> tags, String keyword) {
+        return boggleRepository.findAllBoggleBySearch(tags, keyword)
+                .stream().map(b -> new BoggleResponseDto(b))
+                .collect(Collectors.toList());
+    }
+
+    public BoggleResponseDto generateBoggle(BoggleRequestDto requestDto, String email) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(
+                //TODO: Exception 처리
+        );
+
+        Boggle boggle = new Boggle(requestDto, member.getTeam());
+        Participant leader = new Participant(member, boggle);
+        boggle.setLeader(leader);
+
+        participantRepository.save(leader);
+        boggleRepository.save(boggle);
+
+        return new BoggleResponseDto(boggle);
+    }
 }

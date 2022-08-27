@@ -1,11 +1,13 @@
 package noeasy.server.domain;
 
+import lombok.NoArgsConstructor;
 import noeasy.server.util.RandomGenerator;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
 @Entity
+@NoArgsConstructor
 public class Participant {
     @Id
     @GeneratedValue(generator = RandomGenerator.generatorName)

@@ -11,5 +11,5 @@ public enum TagType {
     DINING_TOGETHER(3, "DINING_TOGETHER");
 
     private final int id;
-    private final String tag;
+    private final String content;
 }

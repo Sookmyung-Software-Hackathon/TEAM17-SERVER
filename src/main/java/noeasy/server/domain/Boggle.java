@@ -41,7 +41,7 @@ public class Boggle extends Timestamped {
     private boolean anonymity;
 
     @OneToOne(fetch = FetchType.LAZY)
-    private Participant leader;
+    private Participant leader = null;
 
     @Column
     private boolean success = false;
@@ -49,13 +49,16 @@ public class Boggle extends Timestamped {
     @ManyToOne(fetch = FetchType.LAZY)
     private Team team;
 
-    public Boggle(BoggleRequestDto requestDto, Participant leader, Team team) {
+    public Boggle(BoggleRequestDto requestDto, Team team) {
         this.title = requestDto.getTitle();
         this.tag = requestDto.getTag();
         this.date_time = requestDto.getDate_time();
-        this.leader = leader;
         this.team = team;
         this.max_person = requestDto.getMax_person();
         this.anonymity = requestDto.isAnonymity();
+    }
+
+    public void setLeader(Participant leader) {
+        this.leader = leader;
     }
 }
