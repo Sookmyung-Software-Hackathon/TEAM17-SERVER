@@ -58,4 +58,14 @@ public class BoggleService {
 
         return new BoggleResponseDto(boggle);
     }
+
+    public List<BoggleResponseDto> readByMemberEmail(String email) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(
+                () -> new CustomException(ResponseCode.MEMBER_NOT_FOUND)
+        );
+
+        return participantRepository.findByMember(member)
+                .stream().map(p -> new BoggleResponseDto(p.getBoggle()))
+                .collect(Collectors.toList());
+    }
 }
