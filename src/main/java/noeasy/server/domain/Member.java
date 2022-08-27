@@ -34,6 +34,9 @@ public class Member extends Timestamped implements UserDetails {
     @NotEmpty
     private String email;
 
+    @NotEmpty
+    private String pw;
+
     @NotNull
     private String nickname;
 
@@ -55,8 +58,14 @@ public class Member extends Timestamped implements UserDetails {
     private List<String> roles = new ArrayList<>();
 
 
-    public Member(MemberDto requestDto){
-
+    public Member(MemberDto memberDto, Team team){
+        this.email = memberDto.getEmail();
+        this.pw = memberDto.getPw();
+        this.nickname = memberDto.getNickname();
+        this.type = memberDto.getType();
+        this.team = team;
+        this.birthYear = memberDto.getBirthYear();
+        this.roles = memberDto.getRoles();
     }
 
 
