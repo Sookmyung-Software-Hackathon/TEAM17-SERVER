@@ -28,6 +28,9 @@ public class MemberService {
     }
 
     public Member signUp(MemberDto.SignUpDto signUpDto){
+        if(memberRepository.existsByEmail(signUpDto.getEmail())){
+            throw new CustomException(ResponseCode.MEMBER_DUPLICATED);
+        }
         MemberDto memberDto = new MemberDto();
         memberDto.setRoles(Collections.singletonList("ROLE_USER"));
         memberDto.setType("local");
