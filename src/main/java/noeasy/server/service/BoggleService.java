@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import noeasy.server.domain.Boggle;
 import noeasy.server.domain.Member;
 import noeasy.server.domain.Participant;
+import noeasy.server.domain.Team;
 import noeasy.server.domain.dto.BoggleRequestDto;
 import noeasy.server.domain.dto.BoggleResponseDto;
 import noeasy.server.repository.boggle.BoggleRepository;
 import noeasy.server.repository.MemberRepository;
 import noeasy.server.repository.ParticipantRepository;
+import noeasy.server.repository.team.TeamRepository;
 import noeasy.server.util.exception.CustomException;
 import noeasy.server.util.exception.ResponseCode;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,7 @@ public class BoggleService {
     private final ParticipantRepository participantRepository;
 
     private final MemberRepository memberRepository;
+    private final TeamRepository teamRepository;
 
     public String participateBoggle(String boggleId, String email) {
         Member member = memberRepository.findByEmail(email).orElseThrow(
@@ -86,6 +89,10 @@ public class BoggleService {
         );
         boggle.setSuccess(true);
         boggleRepository.save(boggle);
+
+        Team team = boggle.getTeam();
+        team.setTemperature(team.getTemperature() + 0.5);
+        teamRepository.save(team);
 
         return "ok";
     }

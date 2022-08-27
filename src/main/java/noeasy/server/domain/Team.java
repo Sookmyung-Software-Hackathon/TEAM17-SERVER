@@ -33,4 +33,8 @@ public class Team extends Timestamped {
     public Team(TeamRequestDto teamRequestDto) {
         this.name = teamRequestDto.getName();
     }
+
+    public void setTemperature(Double temperature) {
+        this.temperature = temperature;
+    }
 }
