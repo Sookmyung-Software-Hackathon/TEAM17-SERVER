@@ -27,7 +27,7 @@ public class Member extends Timestamped implements UserDetails {
 
     @Id
     @GeneratedValue(generator = RandomGenerator.generatorName)
-    @GenericGenerator(name = RandomGenerator.generatorName, strategy = "com.noeasy.server.util.RandomGenerator")
+    @GenericGenerator(name = RandomGenerator.generatorName, strategy = "noeasy.server.util.RandomGenerator")
     @Column
     private String id;
 
@@ -41,7 +41,7 @@ public class Member extends Timestamped implements UserDetails {
     private String type;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="team_id")
     private Team team;
 
