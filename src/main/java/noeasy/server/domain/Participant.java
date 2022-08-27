@@ -1,11 +1,13 @@
 package noeasy.server.domain;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import noeasy.server.util.RandomGenerator;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+@Getter
 @Entity
 @NoArgsConstructor
 public class Participant {

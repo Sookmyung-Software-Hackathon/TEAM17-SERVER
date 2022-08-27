@@ -64,6 +64,8 @@ public class BoggleService {
                 () -> new CustomException(ResponseCode.MEMBER_NOT_FOUND)
         );
 
-        return boggleRepository.findByMember(member).stream().map(e -> new BoggleResponseDto(e)).collect(Collectors.toList());
+        return participantRepository.findByMember(member)
+                .stream().map(p -> new BoggleResponseDto(p.getBoggle()))
+                .collect(Collectors.toList());
     }
 }
