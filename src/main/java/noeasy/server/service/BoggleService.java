@@ -10,6 +10,8 @@ import noeasy.server.domain.type.TagType;
 import noeasy.server.repository.boggle.BoggleRepository;
 import noeasy.server.repository.MemberRepository;
 import noeasy.server.repository.ParticipantRepository;
+import noeasy.server.util.exception.CustomException;
+import noeasy.server.util.exception.ResponseCode;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,10 +26,10 @@ public class BoggleService {
 
     public String participateBoggle(String boggleId, String email) {
         Member member = memberRepository.findByEmail(email).orElseThrow(
-                //TODO: Exception 추가
+                () -> new CustomException(ResponseCode.MEMBER_NOT_FOUND)
         );
         Boggle boggle = boggleRepository.findById(boggleId).orElseThrow(
-                //TODO: Exception 추가
+                () -> new CustomException(ResponseCode.BOGGLE_NOT_FOUND)
         );
 
         Participant participant = new Participant(member, boggle);
@@ -44,7 +46,7 @@ public class BoggleService {
 
     public BoggleResponseDto generateBoggle(BoggleRequestDto requestDto, String email) {
         Member member = memberRepository.findByEmail(email).orElseThrow(
-                //TODO: Exception 처리
+                () -> new CustomException(ResponseCode.MEMBER_NOT_FOUND)
         );
 
         Boggle boggle = new Boggle(requestDto, member.getTeam());

@@ -2,9 +2,9 @@ package noeasy.server.controller;
 
 import lombok.RequiredArgsConstructor;
 import noeasy.server.service.TeamService;
+import noeasy.server.util.ResponseTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,9 +15,13 @@ public class TeamController {
     private final TeamService teamService;
 
     @GetMapping("/ranking")
-    public ResponseEntity<?> readTeamRanking() {
+    public ResponseEntity<ResponseTemplate> readTeamRanking() {
+
         return ResponseEntity
-                .ok()
-                .body(teamService.readTeamRanking());
+                .ok(new ResponseTemplate(
+                        200,
+                        "성공",
+                        teamService.readTeamRanking())
+                );
     }
 }
