@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member, Long> {
-    public Optional<Member> findByEmail(String email);
+public interface MemberRepository extends JpaRepository<Member, String> {
+    Optional<Member> findByEmail(String email);
+    Boolean existsByEmail(String email);
 }
