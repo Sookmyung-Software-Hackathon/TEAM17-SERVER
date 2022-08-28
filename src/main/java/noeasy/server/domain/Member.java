@@ -51,6 +51,10 @@ public class Member extends Timestamped implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
     private List<Participant> participantList;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
+    private List<Voter> voterList;
+
+
     private Integer birthYear;
 
     @ElementCollection(fetch = FetchType.EAGER)
