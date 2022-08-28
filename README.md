@@ -5,6 +5,7 @@
 # ✨ 보글보글(Boggle Boggle!) ✨
 
 ![img_logo](https://github.com/Sookmyung-Software-Hackathon/TEAM17-SERVER/blob/main/main.png)
+![img_logo](https://github.com/Sookmyung-Software-Hackathon/TEAM17-SERVER/blob/main/%E1%84%87%E1%85%A9%E1%84%80%E1%85%B3%E1%86%AF%20%E1%84%87%E1%85%A9%E1%84%80%E1%85%B3%E1%86%AF(Boggle%20Boggle)%20-%20NoEasy.jpg)
 
 
 ## 팀명 <NoEasy🏃🏻‍♀️> 
