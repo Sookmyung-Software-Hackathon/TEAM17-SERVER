@@ -46,6 +46,21 @@
 </br>
 </br>
 
+## 화면 구성
+
+### 첫호면
+<img width="327" alt="image" src="https://user-images.githubusercontent.com/62435316/187075188-602880d3-5d2a-4410-a572-3bca7070a1d7.png">
+<img width="216" alt="image" src="https://user-images.githubusercontent.com/62435316/187075202-e5717687-4c91-4247-8eea-37f3478086ac.png">
+
+### 메인화면
+<img width="358" alt="image" src="https://user-images.githubusercontent.com/62435316/187075228-67649a46-c029-4b96-9fc0-0ee12d13e63d.png">
+
+### 보글/투표 추가 
+<img width="364" alt="image" src="https://user-images.githubusercontent.com/62435316/187075245-9fc08912-1a5d-47b4-844e-0fda96765de5.png">
+
+### 보글 목록
+<img width="175" alt="image" src="https://user-images.githubusercontent.com/62435316/187075259-c5ee08a8-d1a1-480d-a220-c729c3e11e87.png">
+
 ## 핵심 기술 및 주요 기능
 ## 🛠️ 기술스텍 🛠️
 
