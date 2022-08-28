@@ -1,15 +1,18 @@
 package noeasy.server.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 import javax.persistence.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class Voter {
     @Id
     @JsonIgnore
@@ -33,4 +36,11 @@ public class Voter {
         this.voteItem = voteItem;
         this.member = member;
     }
+    @NotNull
+    @JsonProperty("vote_id")
+    private String voteId;
+
+    @NotNull
+    private String memberId;
+
 }

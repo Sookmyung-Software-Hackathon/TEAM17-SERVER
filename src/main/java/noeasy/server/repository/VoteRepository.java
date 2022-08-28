@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, Long> {
 
-    List<Vote> findByMemberId(String memberID);
+    List<Vote> findByTeamId(String teamId);
 }

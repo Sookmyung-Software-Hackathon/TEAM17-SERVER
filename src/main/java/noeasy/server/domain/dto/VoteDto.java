@@ -3,6 +3,7 @@ package noeasy.server.domain.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import noeasy.server.domain.Vote;
 
@@ -19,11 +20,19 @@ public class VoteDto {
 
     private List<String> voteContent;
 
+    @Getter
+    @Setter
+    @NoArgsConstructor
     public static class HomeDto{
         @NotNull
         private String title;
 
         private String expired;
+
+        private List<VoteItemDto.ListDto> voteList;
+
+        @JsonProperty("participate_rate")
+        private String participateRate;
 
         private List<VoteItemDto> itemList;
 
