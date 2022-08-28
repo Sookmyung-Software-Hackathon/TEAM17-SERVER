@@ -40,6 +40,12 @@
 </br>
 </br>
 
+## 시연 영상
+![ezgif-1-bab2c4e0d2](https://user-images.githubusercontent.com/62435316/187075113-b29d3018-e896-4e3c-ab18-e9c67b7db417.gif)
+
+</br>
+</br>
+
 ## 핵심 기술 및 주요 기능
 ## 🛠️ 기술스텍 🛠️
 
