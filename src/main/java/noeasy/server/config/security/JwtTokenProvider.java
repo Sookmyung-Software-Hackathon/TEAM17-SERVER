@@ -2,8 +2,7 @@ package noeasy.server.config.security;
 
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
-import noeasy.server.repository.MemberRepository;
-import noeasy.server.util.KeyService;
+import noeasy.server.repository.Member.MemberRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

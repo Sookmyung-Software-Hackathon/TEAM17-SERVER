@@ -1,10 +1,10 @@
-package noeasy.server.service;
+package noeasy.server.repository.team.service;
 
 import lombok.AllArgsConstructor;
 import noeasy.server.domain.Member;
 import noeasy.server.domain.Team;
 import noeasy.server.domain.dto.MemberDto;
-import noeasy.server.repository.MemberRepository;
+import noeasy.server.repository.Member.MemberRepository;
 import noeasy.server.repository.team.TeamRepository;
 import noeasy.server.util.exception.CustomException;
 import noeasy.server.util.exception.ResponseCode;

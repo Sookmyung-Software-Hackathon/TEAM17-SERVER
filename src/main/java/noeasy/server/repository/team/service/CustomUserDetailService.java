@@ -1,7 +1,7 @@
-package noeasy.server.service;
+package noeasy.server.repository.team.service;
 
 import lombok.RequiredArgsConstructor;
-import noeasy.server.repository.MemberRepository;
+import noeasy.server.repository.Member.MemberRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

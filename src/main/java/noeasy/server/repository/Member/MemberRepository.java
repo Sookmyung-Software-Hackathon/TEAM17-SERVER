@@ -1,4 +1,4 @@
-package noeasy.server.repository;
+package noeasy.server.repository.Member;
 
 import noeasy.server.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;

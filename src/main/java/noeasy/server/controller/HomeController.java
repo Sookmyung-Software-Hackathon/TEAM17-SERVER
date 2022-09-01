@@ -1,8 +1,8 @@
 package noeasy.server.controller;
 
 import lombok.RequiredArgsConstructor;
-import noeasy.server.service.BoggleService;
-import noeasy.server.service.VoteService;
+import noeasy.server.repository.team.service.BoggleService;
+import noeasy.server.repository.team.service.VoteService;
 import noeasy.server.util.ResponseTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

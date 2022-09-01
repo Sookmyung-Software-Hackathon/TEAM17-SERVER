@@ -1,4 +1,4 @@
-package noeasy.server.service;
+package noeasy.server.repository.team.service;
 
 import lombok.RequiredArgsConstructor;
 import noeasy.server.domain.Team;

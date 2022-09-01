@@ -1,4 +1,4 @@
-package noeasy.server.service;
+package noeasy.server.repository.team.service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

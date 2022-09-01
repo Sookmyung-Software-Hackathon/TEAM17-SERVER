@@ -4,12 +4,10 @@ import lombok.RequiredArgsConstructor;
 import noeasy.server.config.security.JwtTokenProvider;
 import noeasy.server.domain.Member;
 import noeasy.server.domain.dto.MemberDto;
-import noeasy.server.service.MemberService;
+import noeasy.server.repository.team.service.MemberService;
 import noeasy.server.util.ResponseTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
 
 @CrossOrigin
 @RestController

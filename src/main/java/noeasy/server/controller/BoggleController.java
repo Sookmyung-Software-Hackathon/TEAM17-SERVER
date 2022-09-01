@@ -3,7 +3,7 @@ package noeasy.server.controller;
 import lombok.RequiredArgsConstructor;
 import noeasy.server.domain.dto.BoggleRequestDto;
 import noeasy.server.domain.type.TagType;
-import noeasy.server.service.BoggleService;
+import noeasy.server.repository.team.service.BoggleService;
 import noeasy.server.util.ResponseTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

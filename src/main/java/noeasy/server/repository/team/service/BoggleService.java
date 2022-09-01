@@ -1,4 +1,4 @@
-package noeasy.server.service;
+package noeasy.server.repository.team.service;
 
 import lombok.RequiredArgsConstructor;
 import noeasy.server.domain.Boggle;
@@ -8,8 +8,8 @@ import noeasy.server.domain.dto.BoggleRequestDto;
 import noeasy.server.domain.dto.BoggleResponseDto;
 import noeasy.server.domain.type.TagType;
 import noeasy.server.repository.boggle.BoggleRepository;
-import noeasy.server.repository.MemberRepository;
-import noeasy.server.repository.ParticipantRepository;
+import noeasy.server.repository.Member.MemberRepository;
+import noeasy.server.repository.Member.ParticipantRepository;
 import noeasy.server.util.exception.CustomException;
 import noeasy.server.util.exception.ResponseCode;
 import org.springframework.stereotype.Service;

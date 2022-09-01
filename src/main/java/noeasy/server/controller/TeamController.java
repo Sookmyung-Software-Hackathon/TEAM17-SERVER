@@ -1,7 +1,7 @@
 package noeasy.server.controller;
 
 import lombok.RequiredArgsConstructor;
-import noeasy.server.service.TeamService;
+import noeasy.server.repository.team.service.TeamService;
 import noeasy.server.util.ResponseTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

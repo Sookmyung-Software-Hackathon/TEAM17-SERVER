@@ -1,4 +1,4 @@
-package noeasy.server.service;
+package noeasy.server.repository.team.service;
 
 import lombok.RequiredArgsConstructor;
 import noeasy.server.config.security.JwtTokenProvider;
@@ -6,7 +6,7 @@ import noeasy.server.domain.*;
 import noeasy.server.domain.dto.VoteDto;
 import noeasy.server.domain.dto.VoteItemDto;
 import noeasy.server.domain.dto.VoterRequestDto;
-import noeasy.server.repository.MemberRepository;
+import noeasy.server.repository.Member.MemberRepository;
 import noeasy.server.repository.VoteItemRepository;
 import noeasy.server.repository.VoteRepository;
 import noeasy.server.repository.VoterRepository;

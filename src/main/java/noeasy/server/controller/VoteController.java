@@ -3,7 +3,7 @@ package noeasy.server.controller;
 import lombok.RequiredArgsConstructor;
 import noeasy.server.domain.dto.VoteDto;
 import noeasy.server.domain.dto.VoterRequestDto;
-import noeasy.server.service.VoteService;
+import noeasy.server.repository.team.service.VoteService;
 import noeasy.server.util.NoDataResponseTemplate;
 import noeasy.server.util.ResponseTemplate;
 import org.springframework.http.ResponseEntity;
